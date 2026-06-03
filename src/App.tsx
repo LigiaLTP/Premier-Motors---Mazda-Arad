@@ -1,6 +1,33 @@
 import "./App.css";
 
 function App() {
+const days = [
+  { name: "Luni", hours: "08:30 – 17:30" },
+  { name: "Marți", hours: "08:30 – 17:30" },
+  { name: "Miercuri", hours: "08:30 – 17:30" },
+  { name: "Joi", hours: "08:30 – 17:30" },
+  { name: "Vineri", hours: "08:30 – 17:30" },
+  { name: "Sâmbătă", hours: "09:00 – 13:00", weekend: true },
+  { name: "Duminică", hours: "Închis", closed: true },
+];
+
+const todayIndex = new Date().getDay();
+
+// getDay() => 0=Duminică, 1=Luni, ..., 6=Sâmbătă
+const dayMap = {
+  1: "Luni",
+  2: "Marți",
+  3: "Miercuri",
+  4: "Joi",
+  5: "Vineri",
+  6: "Sâmbătă",
+  0: "Duminică",
+};
+
+const todayName = dayMap[todayIndex];
+
+
+
   return (
     <main className="page">
       <section className="hero">
@@ -27,6 +54,8 @@ function App() {
             Sună acum
           </a>
         </nav>
+
+
 
         <div className="heroContent">
           <div className="heroText">
@@ -96,42 +125,22 @@ function App() {
                 <strong>Program showroom & service</strong>
               </div>
 
-              <div className="hoursList">
-                <div className="hoursRow">
-                  <span>Marți</span>
-                  <strong>08:30 – 17:30</strong>
-                </div>
+             <div className="hoursList">
+  {days.map((day) => (
+    <div
+      key={day.name}
+      className={`hoursRow
+        ${day.weekend ? "weekend" : ""}
+        ${day.closed ? "closed" : ""}
+        ${day.name === todayName ? "today" : ""}
+      `}
+    >
+      <span>{day.name}</span>
+      <strong>{day.hours}</strong>
+    </div>
+  ))}
+</div>
 
-                <div className="hoursRow">
-                  <span>Miercuri</span>
-                  <strong>08:30 – 17:30</strong>
-                </div>
-
-                <div className="hoursRow">
-                  <span>Joi</span>
-                  <strong>08:30 – 17:30</strong>
-                </div>
-
-                <div className="hoursRow">
-                  <span>Vineri</span>
-                  <strong>08:30 – 17:30</strong>
-                </div>
-
-                <div className="hoursRow weekend">
-                  <span>Sâmbătă</span>
-                  <strong>09:00 – 13:00</strong>
-                </div>
-
-                <div className="hoursRow closed">
-                  <span>Duminică</span>
-                  <strong>Închis</strong>
-                </div>
-
-                <div className="hoursRow today">
-                  <span>Luni</span>
-                  <strong>08:30 – 17:30</strong>
-                </div>
-              </div>
             </div>
           </div>
         </div>

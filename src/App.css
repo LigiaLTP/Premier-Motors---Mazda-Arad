@@ -874,3 +874,8 @@ a {
     font-size: 18px;
   }
 }
+.today {
+  background: #ffb000;
+  color: #111;
+  font-weight: 700;
+}
